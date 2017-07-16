@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ClanDudeManager {
 
-	public ClanDudeMovement movement;
+	public ClanDude clanDude;
 	public GameObject instance;
 
 	// Use this for initialization
@@ -18,6 +18,6 @@ public class ClanDudeManager {
 	}
 
 	public void Setup() {
-		movement = instance.GetComponent<ClanDudeMovement> ();
+		clanDude = instance.GetComponent<ClanDude> ();
 	}
 }
