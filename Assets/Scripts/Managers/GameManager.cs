@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour {
 				Interact (this.selectedActor);
 			}
 		}
+		if (Input.GetKeyDown (KeyCode.C) && this.selectedActor != null) {
+			this.selectedActor.LogStatus ();
+		}
 	}
 
 	Actor SelectActor() {
