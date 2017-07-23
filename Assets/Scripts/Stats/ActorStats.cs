@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ActorStats : MonoBehaviour {
 
@@ -22,6 +23,25 @@ public class ActorStats : MonoBehaviour {
 		this.bonusStats.Remove (bonus);
 	}
 
+	public void AddStatsFromEquippable (Equippable equippable) {
+		foreach (StatValue statValue in equippable.BaseStats()) {
+			AddBonus (statValue);
+		}
+	}
+		
+	public void RemoveStatsFromEquippable(Equippable equippable) {
+		foreach (StatValue statValue in equippable.BaseStats()) {
+			RemoveBonus (statValue);
+		}
+	}
+
+	public void LogStatus(System.Text.StringBuilder sb) {
+		sb.AppendLine ("Stats:");
+		foreach (Stats stat in Enum.GetValues(typeof(Stats))) {
+			sb.AppendLine(stat + ": " + GetStat (stat));
+		}
+	}
+
 	private float GetBaseStatValue(Stats stat) {
 		float statValue = 0f;
 		this.baseStats.TryGetValue (stat, out statValue);
@@ -37,5 +57,4 @@ public class ActorStats : MonoBehaviour {
 		}
 		return statValue;
 	}
-
 }

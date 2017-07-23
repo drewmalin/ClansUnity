@@ -15,19 +15,11 @@ public class Crate : InteractableObject {
 		if (this.items.Count > 0) {
 			// TODO: grab all items?
 			GameObject item = items [this.items.Count - 1];
-			Equipable equipable = item.GetComponent<Equipable> ();
-			if (equipable != null) {
-				// TODO: identify that this item should be equipped to a particular 'slot' (e.g. 'head') -- also do this instantiation in the inventory manager
-				GameObject equippedItem = Instantiate (item,
-					new Vector3 (actor.transform.position.x, actor.transform.position.y + .6f, actor.transform.position.z),
-					Quaternion.Euler(-12f, actor.transform.rotation.eulerAngles.y, actor.transform.rotation.eulerAngles.z)) as GameObject;
-				equippedItem.transform.SetParent (actor.transform);
-
-				actor.Equip (equipable);
+			if (item.GetComponent<Equippable> () != null) {
+				actor.InstantiateAndEquip (item);
 			} 
-			else {
-				// TODO: add the item to the actor's inventory
-				Debug.Log (item + " is not equipable");
+			else if (item.GetComponent<Item> () != null) {
+				actor.AddToInventory (item.GetComponent<Item> ());
 			}
 			this.items.Remove (item);
 		} 
