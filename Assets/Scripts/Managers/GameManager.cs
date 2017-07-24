@@ -6,14 +6,15 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject clanDudePrefab;
 
-	Actor selectedActor;
+	private Actor selectedActor;
+
+	// temporary
 	ClanDudeManager clanDude1;
 	ClanDudeManager clanDude2;
 	ClanDudeManager clanDude3;
 
 	void Start () {
 		SpawnClanDudes ();
-
 	}
 
 	private void SpawnClanDudes() {
@@ -39,8 +40,16 @@ public class GameManager : MonoBehaviour {
 				Interact (this.selectedActor);
 			}
 		}
-		if (Input.GetKeyDown (KeyCode.C) && this.selectedActor != null) {
-			this.selectedActor.LogStatus ();
+
+		if (this.selectedActor != null) {
+			// temporary
+			if (Input.GetKeyDown (KeyCode.C)) {
+				this.selectedActor.LogStatus ();
+			}
+			ActorInfoManager.SINGLETON.SetActor (this.selectedActor);
+		} 
+		else {
+			ActorInfoManager.SINGLETON.Clear ();
 		}
 	}
 

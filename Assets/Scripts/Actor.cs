@@ -123,6 +123,10 @@ public class Actor : MonoBehaviour {
 		this.inventoryManager.RemoveItem (item);
 	}
 
+	public virtual ActorStats GetStats() {
+		return this.stats;
+	}
+
 	public void LogStatus () {
 		System.Text.StringBuilder sb = new System.Text.StringBuilder();
 		sb.AppendLine (this + " status:");

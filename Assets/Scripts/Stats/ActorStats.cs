@@ -34,21 +34,14 @@ public class ActorStats : MonoBehaviour {
 			RemoveBonus (statValue);
 		}
 	}
-
-	public void LogStatus(System.Text.StringBuilder sb) {
-		sb.AppendLine ("Stats:");
-		foreach (Stats stat in Enum.GetValues(typeof(Stats))) {
-			sb.AppendLine(stat + ": " + GetStat (stat));
-		}
-	}
-
-	private float GetBaseStatValue(Stats stat) {
+		
+	public float GetBaseStatValue(Stats stat) {
 		float statValue = 0f;
 		this.baseStats.TryGetValue (stat, out statValue);
 		return statValue;
 	}
 
-	private float GetStatBonusValue(Stats stat) {
+	public float GetStatBonusValue(Stats stat) {
 		float statValue = 0f;
 		foreach (StatValue bonusStat in this.bonusStats) {
 			if (bonusStat.stat.Equals (stat)) {
@@ -56,5 +49,12 @@ public class ActorStats : MonoBehaviour {
 			}
 		}
 		return statValue;
+	}
+
+	public void LogStatus(System.Text.StringBuilder sb) {
+		sb.AppendLine ("Stats:");
+		foreach (Stats stat in Enum.GetValues(typeof(Stats))) {
+			sb.AppendLine(stat + ": " + GetStat (stat));
+		}
 	}
 }
